@@ -27,6 +27,7 @@ if __name__ == '__main__':
         main_dir = sys.argv[1]
         if os.path.exists(main_dir):
             if os.path.isdir(main_dir):
+                print("Renaming files in: ", main_dir)
                 rename_with_hash(main_dir)
             else:
                 print("This file '{}' is not a directory".format(main_dir))
