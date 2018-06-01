@@ -12,14 +12,17 @@ def sha256_checksum(filename, block_size=65536):
 
 
 def rename_with_hash(directory):
-    i = 0
     for root, dirs, files in os.walk(directory):
+        n_of_files = len(files)
+        print(root, " ", str(n_of_files))
+        i = 0
         for filename in files:
-            file_path = os.path.join(root, filename)
-            file_hash = sha256_checksum(file_path)
-            os.rename(file_path, os.path.join(root, "{}.apk".format(file_hash)))
+            if len(filename) != 68:  # TODO improve
+                file_path = os.path.join(root, filename)
+                file_hash = sha256_checksum(file_path)
+                os.rename(file_path, os.path.join(root, "{}.apk".format(file_hash)))
             i += 1
-    print("{} files renamed".format(i))
+            print("{}/{} processed".format(i, n_of_files))
 
 
 if __name__ == '__main__':
